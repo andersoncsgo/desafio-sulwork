@@ -17,10 +17,12 @@ public class CorsConfig {
             .allowedOrigins(
                 "http://localhost:8080", 
                 "http://localhost:4200",
-                "https://desafio-sulwork.vercel.app"
+                "https://desafio-sulwork.vercel.app",
+                "https://desafio-sulwork-production.up.railway.app"
             )
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
             .allowedHeaders("*")
+            .exposedHeaders("*")
             .allowCredentials(true);
       }
     };
