@@ -2,6 +2,13 @@
 
 Aplicação web fullstack para gerenciar café da manhã colaborativo, permitindo cadastro de colaboradores, registro de itens que serão trazidos em datas específicas, e marcação de confirmação no dia do evento.
 
+## 🌐 Aplicação em Produção
+
+- **🚀 Frontend (Vercel)**: https://desafio-sulwork.vercel.app
+- **⚙️ Backend API (Railway)**: https://desafio-sulwork-production.up.railway.app
+- **📚 Documentação Swagger**: https://desafio-sulwork-production.up.railway.app/swagger-ui/index.html
+- **💻 Repositório GitHub**: https://github.com/andersoncsgo/desafio-sulwork
+
 ## 🚀 Tecnologias
 
 - **Frontend**: Angular 17 (standalone components) + TypeScript + Nginx
@@ -168,7 +175,9 @@ As migrations Flyway são executadas automaticamente ao iniciar o backend:
 - `PATCH /api/opcoes/{id}/marcar-trouxe` - Marcar se trouxe (body: `{"trouxe": true}`)
 - `DELETE /api/opcoes/{id}` - Excluir opção
 
-Documentação completa: http://localhost:8081/swagger-ui.html
+**Documentação completa**:
+- Local: http://localhost:8081/swagger-ui/index.html
+- Produção: https://desafio-sulwork-production.up.railway.app/swagger-ui/index.html
 
 ## 🧪 Executar Testes
 
@@ -215,13 +224,15 @@ docker-compose up -d --build
 **Backend (docker-compose.yml)**
 - `SPRING_DATASOURCE_URL`: URL do banco
 - `SPRING_DATASOURCE_USERNAME`: Usuário do banco
-- `SPRING_DATASOURCE_PASSWORD`: Senha do banco
+- `SPRING_DATASOURCE_PASSWORD`: Senha do banco (⚠️ **Nunca commite credenciais reais no Git**)
 - `SERVER_PORT`: Porta do backend (padrão: 8081)
 
 **PostgreSQL (docker-compose.yml)**
 - `POSTGRES_DB`: Nome do database (padrão: sulwork)
 - `POSTGRES_USER`: Usuário (padrão: postgres)
-- `POSTGRES_PASSWORD`: Senha (padrão: postgres)
+- `POSTGRES_PASSWORD`: Senha (padrão: postgres - apenas para desenvolvimento local)
+
+> 🔒 **Segurança**: As credenciais do banco de dados em produção (Railway) são configuradas via variáveis de ambiente do serviço e **não estão** commitadas no repositório. O `.gitignore` bloqueia arquivos `.env` e o diretório `.azure/` para proteger informações sensíveis.
 
 ## ✅ Conformidade com o Desafio
 
@@ -257,10 +268,11 @@ docker-compose up -d --build
 
 | Item | Status | Localização |
 |------|--------|-------------|
-| **Código no GitHub** | ✅ | Pronto para commit |
+| **Código no GitHub** | ✅ | https://github.com/andersoncsgo/desafio-sulwork |
 | **README detalhado** | ✅ | Este arquivo |
-| **Documentação API** | ✅ | Swagger em `http://localhost:8081/swagger-ui.html` |
+| **Documentação API** | ✅ | https://desafio-sulwork-production.up.railway.app/swagger-ui/index.html |
 | **Docker Compose funcional** | ✅ | `docker-compose up -d` executa tudo |
+| **Deploy em produção** | ✅ | Frontend (Vercel) + Backend (Railway) |
 | **Testes executáveis** | ✅ | `mvn test` (backend), `npm test` (frontend) |
 
 ### Diferenciais Implementados
@@ -303,3 +315,35 @@ em.createNativeQuery("DELETE FROM colaborador WHERE id = ?").executeUpdate()
 ✅ **8 diferenciais** implementados além do esperado
 
 O projeto está **totalmente completo** e pronto para avaliação.
+
+## 🔒 Segurança e Boas Práticas
+
+### Proteção de Credenciais
+- ✅ `.gitignore` configurado para bloquear arquivos `.env`, `.env.*`, `.azure/`, e `scripts/`
+- ✅ Credenciais de produção (Railway/PostgreSQL) configuradas via variáveis de ambiente da plataforma
+- ✅ Senhas padrão (`postgres`/`123`) apenas para desenvolvimento local via Docker
+- ✅ Nenhuma senha real commitada no repositório
+
+### Validações de Segurança
+- ✅ CORS configurado para domínios específicos (localhost + Vercel)
+- ✅ Validação de CPF com 11 dígitos obrigatórios
+- ✅ Tratamento global de exceções sem exposição de stack traces
+- ✅ Timezone configurado explicitamente (America/Sao_Paulo) para evitar bugs de fuso horário
+
+### Checklist de Conformidade
+- ✅ Sem senhas hardcoded no código
+- ✅ `.gitignore` protegendo informações sensíveis
+- ✅ Variáveis de ambiente usando valores default seguros para desenvolvimento
+- ✅ Documentação clara sobre configuração de produção vs desenvolvimento
+- ✅ Commits organizados seguindo Conventional Commits
+
+---
+
+## 📞 Contato
+
+Desenvolvido para o Desafio Sulwork por **Anderson Lucas**.
+
+**Links do Projeto**:
+- 🌐 Aplicação: https://desafio-sulwork.vercel.app
+- 💻 GitHub: https://github.com/andersoncsgo/desafio-sulwork
+- 📚 API Docs: https://desafio-sulwork-production.up.railway.app/swagger-ui/index.html
