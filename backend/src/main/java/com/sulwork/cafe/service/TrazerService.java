@@ -14,11 +14,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class TrazerService {
+  private static final ZoneId BRAZIL_ZONE = ZoneId.of("America/Sao_Paulo");
+  
   private final TrazerNativeRepository repo;
   private final ColaboradorNativeRepository colabRepo;
   private final DataFuturaValidator dataFuturaValidator;
@@ -66,7 +69,8 @@ public class TrazerService {
   public void marcarTrouxe(Long id, UpdateTrouxeRequest req) {
     var trazer = repo.findById(id).orElseThrow(() ->
         new BusinessException("Opção não encontrada", HttpStatus.NOT_FOUND.value()));
-    if (!trazer.getDataDoCafe().isEqual(LocalDate.now())) {
+    LocalDate hoje = LocalDate.now(BRAZIL_ZONE);
+    if (!trazer.getDataDoCafe().isEqual(hoje)) {
       throw new BusinessException("Marcação permitida apenas no dia do café", HttpStatus.UNPROCESSABLE_ENTITY.value());
     }
     var rows = repo.updateTrouxe(id, req.trouxe());
@@ -79,7 +83,7 @@ public class TrazerService {
   }
 
   public int autoMarcarPendentesComoNaoTrouxe() {
-    return repo.autoMarkPastAsFalse(LocalDate.now());
+    return repo.autoMarkPastAsFalse(LocalDate.now(BRAZIL_ZONE));
   }
 
   private String normalizeItem(String item) {
