@@ -1,0 +1,45 @@
+
+.date-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.date-input-group input[type="date"] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px !important;
+}
+
+.status-pending {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.status-yes {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.status-no {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  border-radius: 4px;
+  color: #1976d2;
+}

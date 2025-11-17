@@ -1,0 +1,34 @@
+  <h2>Cadastro de Opções por Data</h2>
+  <form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="form-field">
+    <label>Colaborador</label>
+    <select formControlName="colaboradorId">
+      <option [ngValue]="null">Selecione</option>
+      <option *ngFor="let c of colaboradores" [ngValue]="c.id">{{c.nome}} - {{c.cpf}}</option>
+    </select>
+    <div class="error" *ngIf="form.controls.colaboradorId.touched && form.controls.colaboradorId.invalid">
+      Selecione um colaborador
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label>Data do Café</label>
+    <input type="date" formControlName="dataDoCafe" />
+    <div class="error" *ngIf="form.controls.dataDoCafe.touched && form.controls.dataDoCafe.invalid">
+      Selecione uma data futura
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label>Item</label>
+    <input type="text" formControlName="item" />
+  <small>Já escolhidos nesse dia: {{ itensJaEscolhidosStr }}</small>
+    <div class="error" *ngIf="form.controls.item.touched && form.controls.item.invalid">
+      Informe um item válido
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Adicionar</button>
+</form>
+<div class="message" *ngIf="msg">{{msg}}</div>
+</div>

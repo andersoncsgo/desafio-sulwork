@@ -1,0 +1,43 @@
+
+<div class="container">
+  <h2>Lista por Data</h2>
+  <div class="form-field">
+    <label>Data</label>
+    <div class="date-input-group">
+      <input type="date" [(ngModel)]="data" />
+      <button class="btn btn-primary" (click)="buscar()">Buscar</button>
+    </div>
+  </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Colaborador</th>
+      <th>CPF</th>
+      <th>Item</th>
+      <th>Trouxe?</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="lista.length === 0">
+      <td colspan="5" class="empty-message">Nenhum registro encontrado para esta data.</td>
+    </tr>
+    <tr *ngFor="let o of lista">
+      <td>{{o.colaboradorNome}}</td>
+      <td>{{o.cpf}}</td>
+      <td>{{o.item}}</td>
+      <td>
+        <span [class]="getTrouxeClass(o.trouxe)">
+          {{o.trouxe === null ? 'Pendente' : (o.trouxe ? 'Sim' : 'Não')}}
+        </span>
+      </td>
+      <td class="actions">
+        <button class="btn btn-success" (click)="marcar(o,true)" [disabled]="!podeMarcar()">Marcar Sim</button>
+        <button class="btn btn-danger" (click)="marcar(o,false)" [disabled]="!podeMarcar()">Marcar Não</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="message" *ngIf="msg">{{msg}}</div>
+</div>
