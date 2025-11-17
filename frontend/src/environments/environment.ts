@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBase: '/api'
+  apiBase: 'https://desafio-sulwork-production.up.railway.app/api'
 };
